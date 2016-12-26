@@ -39,7 +39,7 @@ class Producer<Element> : Observable<Element> {
 }
 
 fileprivate class SinkDisposer: Cancelable {
-    #if os(Linux)
+    #if os(Linux) || CYGWIN
     fileprivate let _lock = SpinLock()
     #endif
 
@@ -66,7 +66,7 @@ fileprivate class SinkDisposer: Cancelable {
         _sink = sink
         _subscription = subscription
 
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
         _lock.lock()
         let previousState = Int32(_state)
         _state = _state | DisposeState.sinkAndSubscriptionSet.rawValue
@@ -88,7 +88,7 @@ fileprivate class SinkDisposer: Cancelable {
     }
     
     func dispose() {
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
         _lock.lock()
         let previousState = Int32(_state)
         _state = _state | DisposeState.disposed.rawValue

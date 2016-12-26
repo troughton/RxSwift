@@ -17,7 +17,7 @@ public func == <Element: Equatable>(lhs: Event<Element>, rhs: Event<Element>) ->
     switch (lhs, rhs) {
     case (.completed, .completed): return true
     case (.error(let e1), .error(let e2)):
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
           return  "\(e1)" == "\(e2)"
         #else
           let error1 = e1 as NSError

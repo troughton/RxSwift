@@ -11,7 +11,7 @@ import RxSwift
 import RxBlocking
 import XCTest
 import RxTest
-#if os(Linux)
+#if os(Linux) || CYGWIN
 import Dispatch
 #endif
 
@@ -169,7 +169,7 @@ extension ObservableTimeTest {
     }
 
     func test_ThrottleTimeSpan_NotLatest_WithRealScheduler() {
-        #if !os(Linux)
+        #if !os(Linux) || CYGWIN
         let scheduler = ConcurrentDispatchQueueScheduler(qos: .default)
 
         let start = Date()

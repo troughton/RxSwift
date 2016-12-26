@@ -14,7 +14,7 @@ Represents a disposable resource which only allows a single assignment of its un
 If an underlying disposable resource has already been set, future attempts to set the underlying disposable resource will throw an exception.
 */
 public class SingleAssignmentDisposable : DisposeBase, Disposable, Cancelable {
-#if os(Linux)
+#if os(Linux) || CYGWIN
     fileprivate let _lock = SpinLock()
 #endif
 
@@ -49,7 +49,7 @@ public class SingleAssignmentDisposable : DisposeBase, Disposable, Cancelable {
     public func setDisposable(_ disposable: Disposable) {
         _disposable = disposable
 
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
         _lock.lock()
         let previousState = Int32(_state)
         _state = _state | DisposeState.disposableSet.rawValue
@@ -71,7 +71,7 @@ public class SingleAssignmentDisposable : DisposeBase, Disposable, Cancelable {
 
     /// Disposes the underlying disposable.
     public func dispose() {
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
         _lock.lock()
         let previousState = Int32(_state)
         _state = _state | DisposeState.disposed.rawValue

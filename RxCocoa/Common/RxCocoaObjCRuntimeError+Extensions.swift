@@ -8,12 +8,12 @@
 
 import Foundation
 #if !RX_NO_MODULE
-    #if SWIFT_PACKAGE && !DISABLE_SWIZZLING && !os(Linux)
+    #if SWIFT_PACKAGE && !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
         import RxCocoaRuntime
     #endif
 #endif
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
     /// RxCocoa ObjC runtime interception mechanism.
     public enum RxCocoaInterceptionMechanism {
         /// Unknown message interception mechanism.

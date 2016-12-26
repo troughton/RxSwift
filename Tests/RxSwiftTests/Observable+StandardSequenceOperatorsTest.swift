@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 import RxSwift
 import RxTest
-#if os(Linux)
+#if os(Linux) || CYGWIN
 import Glibc
 #endif
 

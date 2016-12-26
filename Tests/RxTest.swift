@@ -14,7 +14,7 @@ import Foundation
 #if TRACE_RESOURCES
 #elseif RELEASE
 #elseif os(macOS) || os(iOS) || os(tvOS) || os(watchOS)
-#elseif os(Linux)
+#elseif os(Linux) || CYGWIN
 #else
 let failure = unhandled_case()
 #endif
@@ -28,7 +28,7 @@ let failure = unhandled_case()
 
 
 
-#if os(Linux)
+#if os(Linux) || CYGWIN
 // TODO: Implement PerformanceTests.swift for Linux
 func getMemoryInfo() -> (bytes: Int64, allocations: Int64) {
     return (0, 0)

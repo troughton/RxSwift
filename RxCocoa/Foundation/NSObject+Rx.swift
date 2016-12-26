@@ -6,24 +6,24 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if !os(Linux)
+#if !os(Linux) || CYGWIN
 
 import Foundation
 #if !RX_NO_MODULE
     import RxSwift
-    #if SWIFT_PACKAGE && !DISABLE_SWIZZLING && !os(Linux)
+    #if SWIFT_PACKAGE && !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
         import RxCocoaRuntime
     #endif
 #endif
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
 fileprivate var deallocatingSubjectTriggerContext: UInt8 = 0
 fileprivate var deallocatingSubjectContext: UInt8 = 0
 #endif
 fileprivate var deallocatedSubjectTriggerContext: UInt8 = 0
 fileprivate var deallocatedSubjectContext: UInt8 = 0
 
-#if !os(Linux)
+#if !os(Linux) || CYGWIN
 
 /**
 KVO is a tricky mechanism.
@@ -72,7 +72,7 @@ extension Reactive where Base: NSObject {
 
 #endif
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
 // KVO
 extension Reactive where Base: NSObject {
     /**
@@ -121,7 +121,7 @@ extension Reactive where Base: AnyObject {
         }
     }
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
 
     /**
      Observable sequence of message arguments that completes when object is deallocated.
@@ -241,7 +241,7 @@ extension Reactive where Base: AnyObject {
 
 // MARK: Message interceptors
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
 
     fileprivate protocol MessageInterceptorSubject: class {
         init()
@@ -326,7 +326,7 @@ fileprivate class DeallocObservable {
 
 // MARK: KVO
 
-#if !os(Linux)
+#if !os(Linux) || CYGWIN
 
 fileprivate protocol KVOObservableProtocol {
     var target: AnyObject { get }
@@ -401,7 +401,7 @@ fileprivate class KVOObservable<Element>
 
 #endif
 
-#if !DISABLE_SWIZZLING && !os(Linux)
+#if !DISABLE_SWIZZLING && !os(Linux) || CYGWIN
 
     fileprivate func observeWeaklyKeyPathFor(_ target: NSObject, keyPath: String, options: NSKeyValueObservingOptions) -> Observable<AnyObject?> {
         let components = keyPath.components(separatedBy: ".").filter { $0 != "self" }

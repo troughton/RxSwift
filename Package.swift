@@ -1,22 +1,11 @@
 import PackageDescription
 
 let buildTests = false
-#if os(Linux)
-let supportsTests = true
-#else
 let supportsTests = false
-#endif
 
-#if os(Linux)
 let rxCocoaDependencies: [Target.Dependency] = [
         .Target(name: "RxSwift"),
     ]
-#else
-let rxCocoaDependencies: [Target.Dependency] = [
-        .Target(name: "RxSwift"),
-        .Target(name: "RxCocoaRuntime"),
-    ]
-#endif
 
 let library = [
         Target(
@@ -33,19 +22,8 @@ let library = [
             dependencies: rxCocoaDependencies
         ),
     ]
- 
-#if os(Linux) 
+
     let cocoaRuntime: [Target] = []   
-#else
-    let cocoaRuntime: [Target] = [
-         Target(
-            name: "RxCocoaRuntime",
-            dependencies: [
-                .Target(name: "RxSwift")
-            ]
-        )
-    ]
-#endif
 
 let tests: [Target] = (buildTests ? [
         Target(
@@ -67,17 +45,10 @@ let tests: [Target] = (buildTests ? [
 
 let testExcludes: [String] = (!buildTests ? ["Sources/AllTestz"] : []) + (!supportsTests ? ["Sources/RxTest"] : [])
 
-#if os(Linux)
-
     let excludes: [String] = [
         "Tests",
         "Sources/RxCocoaRuntime",
     ] + testExcludes
-#else
-    let excludes: [String] = [
-        "Tests",
-    ] + testExcludes
-#endif
 
 let package = Package(
     name: "RxSwift",

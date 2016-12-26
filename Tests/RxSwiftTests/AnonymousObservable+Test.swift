@@ -88,7 +88,7 @@ extension AnonymousObservableTests {
         XCTAssertEqual(elements, [0])
     }
 
-    #if !os(Linux)
+    #if !os(Linux) || CYGWIN
     func testAnonymousObservable_disposeReferenceDoesntRetainObservable() {
 
         var targetDeallocated = false

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-#if os(Linux)
+#if os(Linux) || CYGWIN
 import Dispatch
 #endif
 
