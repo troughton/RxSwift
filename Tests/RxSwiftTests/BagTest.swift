@@ -7,7 +7,7 @@
 //
 
 // testable import doesn't work well in Linux
-#if !os(Linux)
+#if !(os(Linux) || CYGWIN || RX_NO_COCOA)
 import Foundation
 import XCTest
 @testable import RxSwift

@@ -6,11 +6,11 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if !os(Linux)
+#if !(os(Linux) || CYGWIN)
 
 import Foundation
 
-#if os(macOS)
+#if os(macOS) && !RX_NO_COCOA
 import Cocoa
 #else
 import UIKit

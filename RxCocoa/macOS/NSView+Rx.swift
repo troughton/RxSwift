@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if os(macOS)
+#if os(macOS) && !RX_NO_COCOA
 
     import Foundation
     import Cocoa

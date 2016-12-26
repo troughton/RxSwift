@@ -49,7 +49,7 @@ import Foundation
 
 #endif
 
-#if os(macOS)
+#if os(macOS) && !RX_NO_COCOA
     import Cocoa
 
     /// Represents text input with reactive extensions.

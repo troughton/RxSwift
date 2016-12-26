@@ -677,7 +677,7 @@ extension KVOObservableTests {
         XCTAssertTrue(rootDeallocated)
     }
     
-    #if os(macOS)
+    #if os(macOS) && !RX_NO_COCOA
     // just making sure it's all the same for NS extensions
     func testObserve_ObserveNSRect() {
         var root: HasStrongProperty! = HasStrongProperty()

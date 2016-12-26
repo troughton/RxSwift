@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if os(Linux)
+#if os(Linux) || CYGWIN
     ////////////////////////////////////////////////////////////////////////////////
     // This is not the greatest API in the world, this is just a tribute.
     // !!! Proof of concept until libdispatch becomes operational. !!!

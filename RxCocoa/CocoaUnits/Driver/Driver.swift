@@ -70,13 +70,13 @@ public func driveOnScheduler(_ scheduler: SchedulerType, action: () -> ()) {
     driverObserveOnScheduler = originalObserveOnScheduler
 }
 
-#if os(Linux)
+#if os(Linux) || CYGWIN
     import Glibc
 #endif
 
 func _forceCompilerToStopDoingInsaneOptimizationsThatBreakCode(_ scheduler: SchedulerType) {
     let a: Int32 = 1
-#if os(Linux)
+#if os(Linux) || CYGWIN
     let b = 314 + Int32(Glibc.random() & 1)
 #else
     let b = 314 + Int32(arc4random() & 1)

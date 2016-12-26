@@ -21,7 +21,7 @@ func XCTAssertErrorEqual(_ lhs: Swift.Error, _ rhs: Swift.Error) {
 
 func NSValuesAreEqual(_ lhs: Any, _ rhs: Any) -> Bool {
     if let lhsValue = lhs as? NSValue, let rhsValue = rhs as? NSValue {
-        #if os(Linux)
+        #if os(Linux) || CYGWIN
             return lhsValue.isEqual(rhsValue)
         #else
             return lhsValue.isEqual(rhsValue)

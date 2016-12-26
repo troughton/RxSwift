@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if !os(Linux)
+#if !(os(Linux) || CYGWIN || RX_NO_COCOA)
 
 import Foundation
 #if !RX_NO_MODULE
